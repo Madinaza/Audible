@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import Arrow from './assets/icons/icon.svg';
+import Arrow from './assets/icons/chevron-right-solid.svg';
 const GetStarted = () => {
   return (
     <SafeAreaView>
@@ -46,6 +46,7 @@ export default GetStarted;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
   },
   logoImg: {
     width: '100%',
@@ -83,5 +84,8 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 20,
     top: 40,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
 });
