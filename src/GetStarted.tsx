@@ -9,7 +9,14 @@ import {
   View,
 } from 'react-native';
 import Arrow from './assets/icons/chevron-right-solid.svg';
+import {useNavigation} from '@react-navigation/native';
+
 const GetStarted = () => {
+  const navigation = useNavigation();
+  const handleSearchScreen = () => {
+    navigation.navigate('SearchScreen');
+  };
+
   return (
     <SafeAreaView style={styles.flex}>
       <View style={styles.container}>
@@ -30,7 +37,9 @@ const GetStarted = () => {
               The first completely free audio book library with the latest world
               titles aviable right now.
             </Text>
-            <TouchableOpacity style={styles.buttons}>
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={handleSearchScreen}>
               <Text style={styles.btnText}>GET STARTED</Text>
               <Arrow fill={'#00235B'} style={styles.btnIcon} />
             </TouchableOpacity>
