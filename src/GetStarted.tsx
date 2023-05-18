@@ -9,39 +9,42 @@ import {
   View,
 } from 'react-native';
 import Arrow from './assets/icons/chevron-right-solid.svg';
-import SplashScreen from 'react-native-splash-screen';
+import {useNavigation} from '@react-navigation/native';
 
 const GetStarted = () => {
-  useEffect(() => {
-    SplashScreen.hide();
-  }, []);
+  const navigation = useNavigation();
+  const handleSearchScreen = () => {
+    navigation.navigate('SearchScreen');
+  };
+
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={styles.flex}>
       <View style={styles.container}>
         <Image
           style={styles.logoImg}
           source={require('./assets/images/logo.png')}
         />
-        <View>
-          <ImageBackground
-            resizeMode="contain"
-            style={styles.backgroundImg}
-            source={require('./assets/images/Pillow.png')}>
-            <View style={styles.Input}>
-              <Text style={styles.text}>
-                ENJOY THOUSANDS OF BOOKS ON AUDIO AND READ ONLINE.
-              </Text>
-              <Text style={styles.paragh}>
-                The first completely free audio book library with the latest
-                world titles aviable right now.
-              </Text>
-              <TouchableOpacity style={styles.buttons}>
-                <Text>GET STARTED</Text>
-                <Arrow />
-              </TouchableOpacity>
-            </View>
-          </ImageBackground>
-        </View>
+
+        <ImageBackground
+          resizeMode="cover"
+          style={styles.backgroundImg}
+          source={require('./assets/images/Pillow.png')}>
+          <View style={styles.Input}>
+            <Text style={styles.text}>
+              ENJOY THOUSANDS OF BOOKS ON AUDIO AND READ ONLINE.
+            </Text>
+            <Text style={styles.paragh}>
+              The first completely free audio book library with the latest world
+              titles aviable right now.
+            </Text>
+            <TouchableOpacity
+              style={styles.buttons}
+              onPress={handleSearchScreen}>
+              <Text style={styles.btnText}>GET STARTED</Text>
+              <Arrow fill={'#00235B'} style={styles.btnIcon} />
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
       </View>
     </SafeAreaView>
   );
@@ -49,7 +52,7 @@ const GetStarted = () => {
 export default GetStarted;
 
 const styles = StyleSheet.create({
-  safeArea: {
+  flex: {
     flex: 1,
   },
   container: {
@@ -62,15 +65,14 @@ const styles = StyleSheet.create({
     top: 60,
   },
   backgroundImg: {
-    height: 500,
+    height: 400,
   },
   text: {
     fontSize: 25,
     fontFamily: 'MavenProExtraBold',
     color: '#F2F2F2',
-    fontWeight: '900',
     textAlign: 'center',
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     marginBottom: 20,
   },
   Input: {
@@ -89,11 +91,21 @@ const styles = StyleSheet.create({
   buttons: {
     backgroundColor: '#FFFFFF',
     width: '85%',
-    height: 60,
+    height: 50,
     borderRadius: 20,
     top: 40,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    paddingHorizontal: 15,
+  },
+  btnText: {
+    fontSize: 28,
+    fontFamily: 'MavenProExtraBold',
+    color: '#00235B',
+  },
+  btnIcon: {
+    width: 30,
+    height: 30,
   },
 });
