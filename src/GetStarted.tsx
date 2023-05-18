@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Image,
   ImageBackground,
@@ -9,9 +9,14 @@ import {
   View,
 } from 'react-native';
 import Arrow from './assets/icons/chevron-right-solid.svg';
+import SplashScreen from 'react-native-splash-screen';
+
 const GetStarted = () => {
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <Image
           style={styles.logoImg}
@@ -44,6 +49,9 @@ const GetStarted = () => {
 export default GetStarted;
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'space-between',
