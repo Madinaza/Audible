@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {
   Image,
   ImageBackground,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,11 +9,12 @@ import {
 } from 'react-native';
 import Arrow from './assets/icons/chevron-right-solid.svg';
 import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const GetStarted = () => {
   const navigation = useNavigation();
-  const handleSearchScreen = () => {
-    navigation.navigate('SearchScreen');
+  const handleToTab = () => {
+    navigation.navigate('TabNavigator');
   };
 
   return (
@@ -37,9 +37,7 @@ const GetStarted = () => {
               The first completely free audio book library with the latest world
               titles aviable right now.
             </Text>
-            <TouchableOpacity
-              style={styles.buttons}
-              onPress={handleSearchScreen}>
+            <TouchableOpacity style={styles.buttons} onPress={handleToTab}>
               <Text style={styles.btnText}>GET STARTED</Text>
               <Arrow fill={'#00235B'} style={styles.btnIcon} />
             </TouchableOpacity>
@@ -54,6 +52,7 @@ export default GetStarted;
 const styles = StyleSheet.create({
   flex: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   container: {
     flex: 1,
