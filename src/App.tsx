@@ -12,7 +12,7 @@ const App = () => {
   return (
     <NavigationContainer
       onReady={() => {
-        SplashScreen.hide();
+      SplashScreen.hide();
       }}>
       <Stack.Navigator initialRouteName="GetStarted">
         <Stack.Screen name="GetStarted" component={GetStarted} />
