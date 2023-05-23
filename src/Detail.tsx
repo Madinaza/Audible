@@ -1,8 +1,38 @@
-import React from 'react';
-import {View, Text, SafeAreaView,StyleSheet, Image, TouchableOpacity} from "react-native";
+import React, { useState } from 'react';
+import {View, Text, SafeAreaView,
+      StyleSheet,
+      Image,
+      TouchableOpacity,
+      Animated,
+      Button,
+      LayoutAnimation,
+    } from "react-native";
+
 import Download from './assets/icons/download.svg'
 import Decscription from './assets/icons/description.svg'
+import { Use } from 'react-native-svg';
+
 const Detail = () => {
+
+
+    const animationController = React.useRef(new Animated.Value(0)).current;
+    const [isShow, setIsShow] = React.useState(false);
+
+    const rotateTransform = animationController.interpolate({
+        inputRange: [0, 1],
+        outputRange: ['0deg', '180deg'],
+    });
+
+    const handleDropDownPress = (): void => {
+        const duration = 300;
+        const config = {
+            duration,
+            toValue: isShow ? 0 : 1,
+            useNativeDriver: true,
+        };
+        Animated.timing(animationController, config).start();
+          setIsShow(!isShow);
+    };
 
     return(
         <SafeAreaView style={styles.container}>
@@ -24,10 +54,21 @@ const Detail = () => {
                 <Text style={styles.text1}>7.5</Text> 
                 </View>             
             <View style={styles.buttoncontainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button}
+                onPress ={() => handleDropDownPress()}>
                    <Text style={styles.text1}>DESCRIPTION</Text> 
+                   <Animated.View style={{transform: [{rotateZ: rotateTransform}]}}>
                     <Decscription/>
+                    </Animated.View>
                 </TouchableOpacity>
+                </View>
+                {isShow ? (
+                <View style={styles.container1}>
+                    <Text style={styles.text2}>Kitab haqqinda melumat.Kitab haqqinda melumat.Kitab haqqinda melumat</Text>
+                   
+                </View>   
+                ) : null}
+                <View style={styles.buttoncontainer}>
                 <TouchableOpacity style={styles.button}>
                 <Download />    
                 </TouchableOpacity>
@@ -45,11 +86,11 @@ const styles = StyleSheet.create({
 
     container:{
         flex:1,
+        marginTop:20
     
     },
    container1:{
         alignItems:'center'
-
     },
     textcontainer:{
         marginHorizontal:25,
@@ -91,6 +132,7 @@ const styles = StyleSheet.create({
         width:350,
         alignItems:'center',
         flexDirection:'row',
+        paddingVertical:10,
         paddingHorizontal:0,
         justifyContent:'space-around'          
        },
@@ -110,6 +152,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         marginTop:89,
-
+         },
+         text2:{
+            fontSize:17,
+            fontWeight:'500', 
+            color:'#27374D'
          },
 });
