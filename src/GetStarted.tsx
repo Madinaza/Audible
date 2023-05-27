@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   Image,
   ImageBackground,
@@ -28,7 +28,7 @@ const GetStarted = () => {
         <ImageBackground
           resizeMode="cover"
           style={styles.backgroundImg}
-          source={require('./assets/images/Pillow.png')}>
+          source={require('./assets/images/pillow.png')}>
           <View style={styles.Input}>
             <Text style={styles.text}>
               ENJOY THOUSANDS OF BOOKS ON AUDIO AND READ ONLINE.
