@@ -1,6 +1,7 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Image,
+  RefreshControl,
   ScrollView,
   StyleSheet,
   TextInput,
@@ -11,20 +12,27 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import SearchButton from '../../assets/icons/magnifying-glass-solid (1).svg';
 import CancelButton from '../../assets/icons/cancel.svg';
 import SearchCard from '../../component/SearchCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import useEffectOnce from 'react-use/lib/useEffectOnce';
+import {getStorage} from '../../common/utils/getStorage';
+import {useFocusEffect} from '@react-navigation/native';
 
-const url = 'https://librivox.org/api/feed/audiobooks/?title=';
-const Search = () => {
+const url = 'https://librivox.org/api/feed/audiobooks/?format=json&id=';
+const Bookshelf = () => {
   const [value, setValue] = useState('Fábulas de Esopo, Vol. 1');
   const [book, setBook] = useState([]);
   const ref = useRef<TextInput>();
+  const [refreshing, setRefreshing] = useState(false);
   const getSearch = async () => {
-    console.log(url + value + '&format=json');
-    const response = await fetch(url + value + '&format=json', {method: 'GET'});
-    const result = await response.json();
-    // console.log(result);
-    setBook(result.books);
-    console.log(book);
+    // search book from bookshelf
   };
+
+  useEffect(() => {
+    getStorage().then(res => {
+      setBook(res);
+    });
+  }, [getStorage()]);
+
   const onChangeText = (text: string) => {
     setValue(text);
   };
@@ -51,14 +59,25 @@ const Search = () => {
           <TextInput
             placeholder="Search..."
             placeholderTextColor="black"
-            ref={ref}
             value={value}
             onChangeText={onChangeText}
           />
         </View>
         <CancelButton width={25} height={25} fill={'#383838'} onPress={Clear} />
       </View>
-      <ScrollView>
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {
+              setRefreshing(true);
+              getStorage().then(res => {
+                setBook(res);
+                setRefreshing(false);
+              });
+            }}
+          />
+        }>
         {book?.map((item, index: number) => {
           return <SearchCard item={item} key={index} />;
         })}
@@ -66,7 +85,7 @@ const Search = () => {
     </SafeAreaView>
   );
 };
-export default Search;
+export default Bookshelf;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',

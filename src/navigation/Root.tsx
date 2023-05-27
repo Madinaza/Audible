@@ -9,6 +9,7 @@ import {Text} from 'react-native';
 import SeacrhIcon from '../assets/icons/magnifying-glass-solid (1).svg';
 import BookIcon from '../assets/icons/book-open-reader-solid.svg';
 import Search from '../screens/search';
+import Bookshelf from '../screens/Bookshelf';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,7 +40,7 @@ const TabNavigator = () => {
       />
       <Tab.Screen
         name="Tab2"
-        component={Tab2}
+        component={Bookshelf}
         options={{
           tabBarIcon: ({focused}) => (
             <BookIcon
