@@ -29,7 +29,7 @@ const GetStartedScreen = () => {
       <ImageBackground
         resizeMode="stretch"
         style={styles.backgroundImg}
-        source={require('../../assets/images/pillow.png')}>
+        source={require('../../assets/images/Pillow.png')}>
         <View style={styles.footer}>
           <Text style={styles.title}>
             ENJOY THOUSANDS OF BOOKS ON AUDIO AND READ ONLINE.

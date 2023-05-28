@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useCallback, useMemo} from 'react';
 import {View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native';
 import Downloads from '../assets/icons/Vector.svg';
 import RemoveIcon from '../assets/icons/Remove.svg';
@@ -6,6 +6,7 @@ import {PublicationFormat, useBookFile} from '../common/useBookFile';
 import useEffectOnce from 'react-use/lib/useEffectOnce';
 import * as Progress from 'react-native-progress';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 // view stilleri - mainContainer, mediaWrapper, headerContainer, childContainer, chidlWrapper ...
 // text stilleri - headerTitle, descriptionTitle...
 // button stilleri - mainButton, deleteButton, buttonWrap
@@ -36,6 +37,7 @@ export interface Author {
 }
 
 const SearchCard = ({item}) => {
+  const navigation = useNavigation();
   const {
     download,
     fileStatus,
@@ -77,8 +79,12 @@ const SearchCard = ({item}) => {
     }
   };
 
+  const navigationHandler = useCallback(() => {
+    navigation.navigate('DetailScreen', {item});
+  }, [item]);
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={navigationHandler}>
       <Image
         resizeMode="contain"
         style={styles.bookimage}
@@ -96,7 +102,7 @@ const SearchCard = ({item}) => {
           {rightContent()?.Component}
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default SearchCard;

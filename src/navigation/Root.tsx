@@ -10,6 +10,7 @@ import SeacrhIcon from '../assets/icons/magnifying-glass-solid (1).svg';
 import BookIcon from '../assets/icons/book-open-reader-solid.svg';
 import Search from '../screens/search';
 import Bookshelf from '../screens/Bookshelf';
+import Detail from '../screens/Detail';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -69,6 +70,7 @@ export const Root = () => {
         <Stack.Screen name="GetStarted" component={GetStartedScreen} />
         {/* <Stack.Screen name="SearchScreen" component={SearchScreen} /> */}
         <Stack.Screen name="TabNavigator" component={TabNavigator} />
+        <Stack.Screen name="DetailScreen" component={Detail} />
       </Stack.Navigator>
     </NavigationContainer>
   );
