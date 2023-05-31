@@ -3,24 +3,24 @@ import { View, Text, TextInput, ScrollView, TouchableOpacity, StyleSheet, Image,
 import SearchButton from './assets/icons/searchnormal1.svg'
 import CancelButton from './assets/icons/cancel-close-delete-svgrepo-com (1) 1.svg'
 
-const url = 'https://librivox.org/api/info'
+const url = 'https://librivox.org/api/feed/audiobooks/?title='
 
 const Search = () => {
     const [value, setValue] = useState("");
-    const [search, setSearch] = useState([]);
+    const [book, setBook] = useState([]);
     const scrollRef = useRef<ScrollView>(null)
     const getSearch = async () => {
         const apiUrl = await fetch(url, { method: 'GET' });
         const result = await apiUrl.json();
         console.log(result);
-        setSearch(result);
+        setBook(result);
     }
 
     const onChanheText = (text: string) => {
         setValue(text);
     };
     const Clear = () => {
-        setSearch([]);
+        setBook([]);
         setValue("")
     };
     return (
