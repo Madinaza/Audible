@@ -13,11 +13,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 
 const GetStartedScreen = () => {
   const navigation = useNavigation();
-  // const handleSearchScreen = () => {
-  //   navigation.navigate('SearchScreen');
-  // };
-  const handleNavigateToTab = () => {
-    navigation.navigate('TabNavigator');
+  const handleSearchScreen = () => {
+    navigation.navigate('SearchScreen');
   };
 
   return (
@@ -38,9 +35,7 @@ const GetStartedScreen = () => {
             The first completely free audio book library with the latest world
             titles aviable right now.
           </Text>
-          <TouchableOpacity
-            style={styles.buttons}
-            onPress={handleNavigateToTab}>
+          <TouchableOpacity style={styles.buttons} onPress={handleSearchScreen}>
             <Text style={styles.btnText}>GET STARTED</Text>
             <Arrow fill={'#00235B'} style={styles.btnIcon} />
           </TouchableOpacity>
