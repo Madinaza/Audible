@@ -1,12 +1,15 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import Downloads from '../assets/icons/Vector.svg';
-
-// view stilleri - mainContainer, mediaWrapper, headerContainer, childContainer, chidlWrapper ...
-// text stilleri - headerTitle, descriptionTitle...
-// button stilleri - mainButton, deleteButton, buttonWrap
+import {useNavigation} from '@react-navigation/native';
 
 const SearchCard = ({item}) => {
+  const navigation = useNavigation();
+
+  const handleDetails = () => {
+    navigation.navigate('BookDetails', {id: item.id});
+  };
+
   return (
     <View style={styles.container}>
       {/* <Image
@@ -20,7 +23,7 @@ const SearchCard = ({item}) => {
           <Text style={styles.writername}>{item?.author}</Text>
           <Text>4h .20min |12 Chapters</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleDetails}>
           <Downloads width={35} height={35} />
         </TouchableOpacity>
       </View>

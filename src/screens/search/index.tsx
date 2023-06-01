@@ -10,25 +10,28 @@ import {
 import {SafeAreaView} from 'react-native-safe-area-context';
 import SearchButton from '../../assets/icons/magnifying-glass-solid (1).svg';
 import CancelButton from '../../assets/icons/cancel.svg';
-import SearchCard from '../../component/SearchCard';
-import {Text} from 'react-native-svg';
+import SearchCard from '../../components/SearchCard';
 
 const url = 'https://librivox.org/api/feed/audiobooks/?title=';
+
 const Search = () => {
   const [value, setValue] = useState('');
-  const [book, setBook] = useState([]);
+  const [books, setBooks] = useState([]);
   const ref = useRef<TextInput>();
+
   const getSearch = async () => {
     const response = await fetch(url + value + '&format=json', {method: 'GET'});
     const result = await response.json();
-    setBook(result.books);
+    setBooks(result.books);
   };
+
   const onChangeText = (text: string) => {
     setValue(text);
   };
+
   const Clear = () => {
     ref.current?.clear();
-    setBook([]);
+    setBooks([]);
     setValue('');
   };
   return (
@@ -40,7 +43,6 @@ const Search = () => {
           source={require('../../assets/images/otherLogo.png')}
         />
       </View>
-
       <View style={styles.search}>
         <View style={styles.search}>
           <TouchableOpacity onPress={getSearch}>
@@ -57,14 +59,16 @@ const Search = () => {
         <CancelButton width={25} height={25} fill={'#383838'} onPress={Clear} />
       </View>
       <ScrollView>
-        {book?.map((item, index) => (
-          <Text key={index}>{item.title}</Text>
+        {books?.map(item => (
+          <SearchCard key={item.id} item={item} />
         ))}
       </ScrollView>
     </SafeAreaView>
   );
 };
+
 export default Search;
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
