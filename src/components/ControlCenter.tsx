@@ -28,7 +28,7 @@ const ControlCenter = () => {
   return (
     <View style={styles.container}>
       <Pressable onPress={skipToPrevious}>
-        <Icon style={styles.icon} name="backward" size={40} />
+        <Icon style={styles.icon} name="backward" size={45} />
       </Pressable>
       <Pressable onPress={() => togglePlayback(playBackState)}>
         <Icon
@@ -38,7 +38,7 @@ const ControlCenter = () => {
         />
       </Pressable>
       <Pressable onPress={skipToNext}>
-        <Icon style={styles.icon} name="forward" size={40} />
+        <Icon style={styles.icon} name="forward" size={45} />
       </Pressable>
     </View>
   );
