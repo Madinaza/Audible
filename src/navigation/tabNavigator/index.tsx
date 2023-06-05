@@ -1,15 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import Search from '../../screens/search';
+import Search from '../../screens/search/index';
 import SeacrhIcon from '../../assets/icons/magnifying-glass-solid (1).svg';
 import BookIcon from '../../assets/icons/book-open-reader-solid.svg';
-import {Text} from 'react-native';
+import Audio from '../../Audio';
 
 const Tab = createBottomTabNavigator();
-
-const Tab2 = () => {
-  return <Text>tab2</Text>;
-};
 
 export const TabNavigator = () => {
   return (
@@ -33,8 +29,8 @@ export const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Tab2"
-        component={Tab2}
+        name="Audio"
+        component={Audio}
         options={{
           tabBarIcon: ({focused}) => (
             <BookIcon

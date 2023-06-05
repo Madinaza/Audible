@@ -1,11 +1,10 @@
 import React from 'react';
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import Downloads from '../assets/icons/Vector.svg';
+import Downloads from '../assets/icons/download.svg';
 import {useNavigation} from '@react-navigation/native';
 
 const SearchCard = ({item}) => {
   const navigation = useNavigation();
-
   const handleDetails = () => {
     navigation.navigate('BookDetails', {id: item.id});
   };

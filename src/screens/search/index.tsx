@@ -3,6 +3,7 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Text,
   TextInput,
   TouchableOpacity,
   View,
@@ -13,7 +14,6 @@ import CancelButton from '../../assets/icons/cancel.svg';
 import SearchCard from '../../components/SearchCard';
 
 const url = 'https://librivox.org/api/feed/audiobooks/?title=';
-
 const Search = () => {
   const [value, setValue] = useState('');
   const [books, setBooks] = useState([]);
@@ -34,6 +34,7 @@ const Search = () => {
     setBooks([]);
     setValue('');
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -59,9 +60,19 @@ const Search = () => {
         <CancelButton width={25} height={25} fill={'#383838'} onPress={Clear} />
       </View>
       <ScrollView>
-        {books?.map(item => (
-          <SearchCard key={item.id} item={item} />
-        ))}
+        {value === null || value.length === 0 ? (
+          <View style={styles.emptyContainer}>
+            <Image
+              resizeMode="contain"
+              source={require('../../assets/images/searchbooks.png')}
+            />
+            <Text style={styles.emptyText}>
+              PLEASE,ENTER BOOK NAME OR AUTHOR NAME .
+            </Text>
+          </View>
+        ) : (
+          books?.map(item => <SearchCard key={item.id} item={item} />)
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -86,5 +97,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#DBDFEA',
     borderRadius: 15,
     paddingHorizontal: 10,
+  },
+  emptyContainer: {
+    alignItems: 'center',
+    marginTop: 70,
+  },
+  emptyText: {
+    fontSize: 26,
+    fontFamily: 'MavenProExtraBold',
+    textAlign: 'center',
+    marginTop: 20,
+    color: '#00156B',
   },
 });
